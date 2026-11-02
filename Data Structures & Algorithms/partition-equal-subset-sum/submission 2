@@ -1,0 +1,33 @@
+
+class Solution {
+    public boolean solve(int[] nums, int i, int target) {
+        if (target == 0) {
+            return true;
+        }
+
+        if (i == nums.length || target < 0) {
+            return false;
+        }
+
+        boolean include = solve(nums, i + 1,
+                                target - nums[i]);
+
+        boolean exclude = solve(nums, i + 1, target);
+
+        return include || exclude;
+    }
+
+    public boolean canPartition(int[] nums) {
+        int total = 0;
+
+        for (int n : nums) {
+            total += n;
+        }
+
+        if (total % 2 != 0) {
+            return false;
+        }
+
+        return solve(nums, 0, total / 2);
+    }
+}
