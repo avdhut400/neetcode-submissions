@@ -1,0 +1,19 @@
+class Solution {
+    public boolean solve(String s,int i,List<String> w){
+        if(i==s.length()){
+            return true;
+        }
+        for(int j=i+1;j<=s.length();j++){
+            String word=s.substring(i,j);
+            if(w.contains(word)){
+                if(solve(s,j,w)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean wordBreak(String s, List<String> wordDict) {
+        return solve(s,0,wordDict);
+    }
+}
