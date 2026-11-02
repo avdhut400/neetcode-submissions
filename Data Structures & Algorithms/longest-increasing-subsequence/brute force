@@ -1,0 +1,18 @@
+
+class Solution {
+    public int solve(int[] nums, int i, int prev) {
+        if (i == nums.length) {
+            return 0;
+        }
+        int exclude = solve(nums, i + 1, prev);
+        int include = 0;
+
+        if (prev == -1 || nums[i] > nums[prev]) {
+            include = 1 + solve(nums, i + 1, i);
+        }
+        return Math.max(include, exclude);
+    }
+    public int lengthOfLIS(int[] nums) {
+        return solve(nums, 0, -1);
+    }
+}
